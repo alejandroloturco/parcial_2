@@ -1,0 +1,63 @@
+from funciones import * 
+
+
+patients={}
+count_patients=1
+while True:
+    print('''Diagnostico de anemia en perros adultos
+\r[1]-- Ingrese un paciente
+\r[2]-- Informe de pacientes almacenados
+\r[3]-- Borrar paciente
+\r[4]-- Salir del pograma''')
+    menu_1=validar("Ingrese la opcion deseasa: ")
+    if menu_1 != None:
+        if menu_1 ==1:
+            ID=validar("Ingrese el documento de identidad del paciente: ")
+            if ID == None:
+                continue
+            nombre=input("Ingrese el nombre del paciente: ")
+            age=validar("Ingrese la edad del paciente: ")
+            if age ==None:
+                continue
+            raza=input("Ingrese la raza de la mascota: ")
+            eritrocitos=validar("Ingrese el nivel de eritrocitos del paciente (10^6/mm^3): ")
+            if eritrocitos == None:
+                continue
+            hemoglobina=validar("Ingrese el valor de la hemoglobina del paciente(g/dL): ")
+            if hemoglobina == None:
+                continue
+            VCM=validar("Ingresar el valor del volumen corpuscular medio (fL): ")
+            if VCM != None:
+                if VCM < 60:
+                    if hemoglobina < 12:
+                        diagnostico="Anemia microcitica hipocromica"
+                    else:
+                        diagnostico="se requieren estudio complementarios"
+                elif 60 <= VCM <= 77:
+                    if 12<= hemoglobina <=19:
+                        diagnostico="Anemia normocitica normocromica"
+                    else:
+                        diagnostico="S e requeiren estudios complementarios"
+                elif VCM > 77:
+                    if hemoglobina < 12:
+                        diagnostico="Anemia macrocitica hipocromica"
+                    elif 12<= hemoglobina <=19:
+                        diagnostico="Anemia macrocitica hipercromicos"
+                    else:
+                        diagnostico="Se requieren estudios complementarios"
+                else:
+                    diagnostico="Se requeiren estudios complementarios"
+            elif VCM == None:
+                continue
+            codig_patient=cod_patient(count_patients,raza)
+            patients[ID]=[nombre,age,ID,codig_patient,diagnostico]
+            count_patients+=1
+            print("")
+        elif menu_1 == 2:
+            pass
+        elif menu_1 == 3:
+            pass
+        elif menu_1 == 4:
+            break
+    elif menu_1 == None:
+        continue
